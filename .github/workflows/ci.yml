@@ -1,0 +1,9 @@
+name: CI
+
+on:
+  pull_request
+  
+jobs:
+  fail:
+    steps:
+      - run: exit 1
