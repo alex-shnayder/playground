@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: lewagon/wait-on-check-action@v0.1-beta.2
         with:
-          check-name: ci
+          check-name: CI
           ref: master
           wait-interval: 10           
           repo-token: ${{ secrets.GITHUB_TOKEN }}
