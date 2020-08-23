@@ -10,7 +10,7 @@ jobs:
       - uses: lewagon/wait-on-check-action@v0.1-beta.2
         with:
           check-name: ci
-          wait: 10
+          wait-interval: 10
           ref: ${{ github.sha }}          
-          token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
