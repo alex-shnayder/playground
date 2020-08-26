@@ -9,6 +9,7 @@ jobs:
         with:
           node-version: '10.x'
           registry-url: 'https://npm.pkg.github.com'
+          scope: '@axtgr'  
       - run: npm install
       - run: npm publish
         env:
