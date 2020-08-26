@@ -9,7 +9,7 @@ jobs:
         with:
           node-version: '10.x'
           registry-url: 'https://npm.pkg.github.com'
-      - run: sed -i -r 's/("name":\s*)"/\1@${{ github.repository_owner }}\//' package.json
+      - run: sed -i -r 's/("name":\s*")/\1@${{ github.repository_owner }}\//' package.json
       - run: npm install      
       - run: npm publish
         env:
