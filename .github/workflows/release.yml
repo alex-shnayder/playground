@@ -17,10 +17,12 @@ jobs:
           ref: master
           wait-interval: 10
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v2
+      - name: Check out the repository
+        uses: actions/checkout@v2
         with:
           ref: master
-      - uses: actions/create-release@v1
+      - name: Create a GitHub release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
