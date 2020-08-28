@@ -15,6 +15,7 @@ on:
 
 jobs:
   ci:
+    name: ci
     strategy:
       matrix:
         nodejs: [8, 10, 12, 14]
