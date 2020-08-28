@@ -17,10 +17,12 @@ jobs:
           ref: master
           wait-interval: 10
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v2
+      - name: Check out the repository
+        uses: actions/checkout@v2
         with:
           ref: master
-      - uses: actions/setup-node@v1
+      - name: Install Node.js
+        uses: actions/setup-node@v1
         with:
           node-version: 14
           registry-url: https://npm.pkg.github.com
@@ -28,6 +30,7 @@ jobs:
         run: sed -i -r 's/("name":\s*")/\1@${{ github.repository_owner }}\//' package.json
       - name: Install the dependencies using the package manager whose lock file is in the root dir
         uses: jaid/action-npm-install@v1.2.1
-      - run: npm publish
+      - name: Publish the package
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
