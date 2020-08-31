@@ -11,12 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Wait for the CI workflow to complete
-        uses: lewagon/wait-on-check-action@v0.1-beta.2
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-ci
         with:
-          check-name: ci (14, ubuntu-latest)
-          ref: master
-          wait-interval: 10
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: ci (14, ubuntu-latest)
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: exit 1
+        if: steps.wait-for-ci.outputs.conclusion == 'failure'
       - name: Check out the repository
         uses: actions/checkout@v2
         with:
