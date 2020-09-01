@@ -10,7 +10,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ runner.os }} ${{ job.runs-on }}
+      - run: echo ${{ job.runs-on }}
+      - run: echo ${{ job.container.runs-on }}
+      - run: echo ${{ job.container }}
       - name: Wait for the CI workflow to complete
         id: wait-for-ci
         uses: fountainhead/action-wait-for-check@v1.0.0        
