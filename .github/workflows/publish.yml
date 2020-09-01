@@ -10,14 +10,15 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ runner.os }} ${{ job.runs-on }}
       - name: Wait for the CI workflow to complete
-        uses: fountainhead/action-wait-for-check@v1.0.0
         id: wait-for-ci
+        uses: fountainhead/action-wait-for-check@v1.0.0        
         with:
           checkName: ci (14, ubuntu-latest)
           token: ${{ secrets.GITHUB_TOKEN }}
-      - run: exit 1
-        if: steps.wait-for-ci.outputs.conclusion == 'failure'
+      - if: steps.wait-for-ci.outputs.conclusion == 'failure'
+        run: exit 1        
       - name: Check out the repository
         uses: actions/checkout@v2
         with:
