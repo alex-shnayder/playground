@@ -32,7 +32,7 @@ jobs:
           node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com
       - name: Add the repository owner as the scope to the package name
-        run: 'node -e "var p = require(''./package.json''); p.name = p.name[0] === ''@'' ? p.name : ''@${{ github.repository_owner }}/'' + p.name; console.log(JSON.stringify(p))" > package.json'
+        run: 'node -e "var p = require(''./package.json''); p.name = p.name[0] === ''@'' ? p.name : ''@${{ github.repository_owner }}/'' + p.name; require(''fs'').writeFileSync(''./package.json'', JSON.stringify(p))"'
       - name: Install the dependencies using the package manager whose lock file is in the root dir
         uses: jaid/action-npm-install@v1.2.1
       - name: Publish the package
