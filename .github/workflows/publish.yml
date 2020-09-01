@@ -11,17 +11,17 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]        
+        node: [14]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Wait for the CI workflow to complete
         id: wait-for-ci
-        uses: fountainhead/action-wait-for-check@v1.0.0        
+        uses: fountainhead/action-wait-for-check@v1.0.0
         with:
           checkName: ci (${{ matrix.os }}, ${{ matrix.node }})
           token: ${{ secrets.GITHUB_TOKEN }}
       - if: steps.wait-for-ci.outputs.conclusion == 'failure'
-        run: exit 1        
+        run: exit 1
       - name: Check out the repository
         uses: actions/checkout@v2
         with:
@@ -32,7 +32,7 @@ jobs:
           node-version: ${{ matrix.node }}
           registry-url: https://npm.pkg.github.com
       - name: Add the repository owner as the scope to the package name
-        run: sed -i -r 's/("name":\s*")([^@])/\1@${{ github.repository_owner }}\/\2/' package.json
+        run: node -e "var p = require('./package.json'); p.name = p.name[0] === '@' ? p.name : '@${{ github.repository_owner }}/' + p.name; console.log(JSON.stringify(p))" > package.json
       - name: Install the dependencies using the package manager whose lock file is in the root dir
         uses: jaid/action-npm-install@v1.2.1
       - name: Publish the package
