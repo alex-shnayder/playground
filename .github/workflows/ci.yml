@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 14
       - name: Run static checks
-        run: npm run lint
+        run: npm run --if-present lint
       - name: Build
         run: npm run build
       - name: Save the build
