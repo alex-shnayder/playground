@@ -56,5 +56,5 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: Skip
+      - name: Finish successfully
         run: exit 0
