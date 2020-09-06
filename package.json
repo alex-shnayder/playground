@@ -2,6 +2,8 @@
   "name": "playground",
   "version": "0.0.12",
   "scripts": {
+    "build": "",
+    "test": "",
     "prepack": ""
   }
 }
