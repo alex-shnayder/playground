@@ -57,3 +57,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Skip
+        run: exit 0
