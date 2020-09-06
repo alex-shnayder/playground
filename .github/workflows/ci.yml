@@ -10,7 +10,27 @@ on:
     paths-ignore: 'bench/**'
 
 jobs:
-  ci:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Run static checks
+        run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Save the build
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+    
+  test:
+    needs: build
     strategy:
       matrix:
         os: [windows-latest, macOS-latest, ubuntu-latest]
@@ -25,5 +45,13 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install the dependencies using the package manager whose lock file is in the root dir
         uses: jaid/action-npm-install@v1.2.1
-      - name: Lint, build and test
-        run: npm run prepack
+      - name: Download the build
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+      - name: Test
+        run: npm run test
+        
+  ci:
+    needs: test
+    runs-on: ubuntu-latest    
