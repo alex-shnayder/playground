@@ -54,4 +54,6 @@ jobs:
         
   ci:
     needs: test
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip
