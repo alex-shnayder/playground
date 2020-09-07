@@ -40,5 +40,5 @@ jobs:
       #   run: npm publish --registry=https://registry.npmjs.org/ --//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
       - name: Add the repository owner as the scope if it's not set
         run: 'npx json -I -f package.json -e "this.name[0] !== ''@'' && (this.name = ''@${{ github.repository_owner }}/'' + this.name)"'
-      - name: Publish the package
+      - name: Publish to GPR
         run: npm publish --registry=https://npm.pkg.github.com/ --//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
