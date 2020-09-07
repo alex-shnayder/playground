@@ -40,7 +40,7 @@ jobs:
       - name: Make the package publishable
         run: npx json -I -f package.json -e "delete this.private"
       - name: Add the repository owner as the scope and set the registry to GPR
-        run: 'npx json -I -f package.json -e "this.name[0] !== ''@'' && (this.name = ''@${{ github.repository_owner }}/'' + this.name)'
+        run: 'npx json -I -f package.json -e "this.name[0] !== ''@'' && (this.name = ''@${{ github.repository_owner }}/'' + this.name)"'
       - name: Install the dependencies using the package manager whose lock file is in the root dir
         uses: jaid/action-npm-install@v1.2.1
       - name: Publish the package
