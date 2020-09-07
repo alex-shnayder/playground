@@ -1,4 +1,4 @@
-name: Publish to GPR
+name: Publish
 
 on:
   workflow_dispatch:
@@ -17,24 +17,31 @@ jobs:
         id: wait-for-ci
         uses: fountainhead/action-wait-for-check@v1.0.0
         with:
-          checkName: ci (${{ matrix.os }}, ${{ matrix.node }})
+          checkName: ci
           token: ${{ secrets.GITHUB_TOKEN }}
       - if: steps.wait-for-ci.outputs.conclusion == 'failure'
         run: exit 1
       - name: Check out the repository
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: master   
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
-          registry-url: https://npm.pkg.github.com
-      - name: Add the repository owner as the scope to the package name
-        run: 'node -e "var p = require(''./package.json''); p.name = p.name[0] === ''@'' ? p.name : ''@${{ github.repository_owner }}/'' + p.name; require(''fs'').writeFileSync(''./package.json'', JSON.stringify(p))"'
+          node-version: ${{ matrix.node }}   
+      - name: Download the build
+        uses: dawidd6/action-download-artifact@v2
+        with:                    
+          workflow: ci.yml
+          name: build
+          commit: ${{ github.sha }}       
+      - name: Make the package publishable
+        run: npx json -I -f package.json -e "delete this.private"
+      - name: Add the repository owner as the scope and set the registry to GPR
+        run: 'npx json -I -f package.json -e "this.name[0] !== ''@'' && (this.name = ''@${{ github.repository_owner }}/'' + this.name); this.publishConfig = {''registry'': ''https://npm.pkg.github.com''}"'
       - name: Install the dependencies using the package manager whose lock file is in the root dir
         uses: jaid/action-npm-install@v1.2.1
       - name: Publish the package
-        run: npm publish
+        run: npm publish --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
