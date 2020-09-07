@@ -29,6 +29,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
+          registry-url: https://npm.pkg.github.com
+          scope: ${{ github.repository_owner }}
       - name: Download the build
         uses: dawidd6/action-download-artifact@v2
         with:
@@ -38,7 +40,7 @@ jobs:
       - name: Make the package publishable
         run: npx json -I -f package.json -e "delete this.private"
       - name: Add the repository owner as the scope and set the registry to GPR
-        run: 'npx json -I -f package.json -e "this.name[0] !== ''@'' && (this.name = ''@${{ github.repository_owner }}/'' + this.name); this.publishConfig = {''registry'': ''https://npm.pkg.github.com''}"'
+        run: 'npx json -I -f package.json -e "this.name[0] !== ''@'' && (this.name = ''@${{ github.repository_owner }}/'' + this.name)'
       - name: Install the dependencies using the package manager whose lock file is in the root dir
         uses: jaid/action-npm-install@v1.2.1
       - name: Publish the package
