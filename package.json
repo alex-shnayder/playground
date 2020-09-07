@@ -5,7 +5,7 @@
     "build"
   ],
   "scripts": {
-    "build": "",
+    "build": "mkdir build && echo 123 > build/empty.txt",
     "test": "",
     "prepack": ""
   }
