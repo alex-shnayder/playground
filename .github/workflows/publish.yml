@@ -38,10 +38,10 @@ jobs:
       - name: Make the package public
         run: npx json -I -f package.json -e "delete this.private"
       # - name: Publish to NPM
-      #   run: npm publish --//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
-      - name: Add the repository owner as the scope
+      #   run: npm publish npm publish --registry=https://registry.npmjs.org/ --//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+      - name: Add the repository owner as the scope if it's not set
         run: 'npx json -I -f package.json -e "this.name[0] !== ''@'' && (this.name = ''@${{ github.repository_owner }}/'' + this.name)"'
       - name: Install the dependencies using the package manager whose lock file is in the root dir
         uses: jaid/action-npm-install@v1.2.1
       - name: Publish the package
-        run: npm publish --//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+        run: npm publish npm publish --registry=https://npm.pkg.github.com/ --//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
