@@ -19,12 +19,11 @@ jobs:
         with:
           checkName: ci
           token: ${{ secrets.GITHUB_TOKEN }}
-      - if: steps.wait-for-ci.outputs.conclusion == 'failure'
+      - name: Fail if CI has failed
+        if: steps.wait-for-ci.outputs.conclusion == 'failure'
         run: exit 1
       - name: Check out the repository
         uses: actions/checkout@v2
-        with:
-          ref: master
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
@@ -32,7 +31,7 @@ jobs:
       - name: Download the build
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: ci.yml
+          workflow: ci
           name: build
           commit: ${{ github.sha }}
       - name: Make the package public
@@ -41,7 +40,5 @@ jobs:
       #   run: npm publish --registry=https://registry.npmjs.org/ --//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
       - name: Add the repository owner as the scope if it's not set
         run: 'npx json -I -f package.json -e "this.name[0] !== ''@'' && (this.name = ''@${{ github.repository_owner }}/'' + this.name)"'
-      - name: Install the dependencies using the package manager whose lock file is in the root dir
-        uses: jaid/action-npm-install@v1.2.1
       - name: Publish the package
         run: npm publish --registry=https://npm.pkg.github.com/ --//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
