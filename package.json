@@ -1,7 +1,9 @@
 {
   "name": "playground",
-  "version": "0.0.12",
-  "files": ["build"],
+  "version": "0.0.13",
+  "files": [
+    "build"
+  ],
   "scripts": {
     "build": "",
     "test": "",
