@@ -3,19 +3,19 @@ name: Create a GitHub Release
 on:
   workflow_dispatch:
   push:
-    tags: 'v*.*.*'
+    tags: "v*.*.*"
 
 jobs:
   release:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]        
+        node: [14]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Wait for the CI workflow to complete
         id: wait-for-ci
-        uses: fountainhead/action-wait-for-check@v1.0.0        
+        uses: fountainhead/action-wait-for-check@v1.0.0
         with:
           checkName: ci (${{ matrix.os }}, ${{ matrix.node }})
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -23,8 +23,6 @@ jobs:
         run: exit 1
       - name: Check out the repository
         uses: actions/checkout@v2
-        with:
-          ref: master
       - name: Create a GitHub release
         uses: actions/create-release@v1
         env:
