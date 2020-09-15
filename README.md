@@ -1,6 +1,6 @@
 <h1 align="center">Outmatch</h1>
 
-<p align="center">An extremely fast and lightweight glob-matching library for JavaScript</p>
+<p align="center"><strong><em>An extremely fast and lightweight glob-matching library for JavaScript</strong></em></p>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/outmatch"><img src="https://img.shields.io/npm/v/outmatch" alt="npm package"></a>
