@@ -57,7 +57,17 @@ isMatch("src/README.md"); //=> false
 
 ## Install
 
-`npm install outmatch`
+##### Package Managers
+
+- `npm install outmatch`
+
+- `yarn add outmatch`
+
+- `pnpm install outmatch`
+
+##### CDN
+
+- [unpkg](https://unpkg.com/outmatch)
 
 ## License
 
