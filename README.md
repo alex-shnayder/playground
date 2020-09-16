@@ -1,4 +1,7 @@
-<h1 align="center">Outmatch</h1>
+<h1 align="center">
+  <br>
+  <img src="assets/logo.png" width="300" height="69">
+</h1>
 
 <p align="center"><strong>An extremely fast and lightweight glob-matching library for JavaScript</strong></p>
 
@@ -10,17 +13,17 @@
   <a href="https://www.buymeacoffee.com/axtgr"><img src="https://img.shields.io/badge/%F0%9F%8D%BA-Buy%20me%20a%20beer-red?style=flat" alt="Buy me a beer"></a>
 </p>
 
-
+<br>
 
 Outmatch takes one or more glob patterns, compiles them into a RegExp and returns a function for matching strings with it.
 
 ```js
-import outmatch from 'outmatch'
+import outmatch from "outmatch";
 
-const isMatch = outmatch('src/**/*.{js,ts}')
+const isMatch = outmatch("src/**/*.{js,ts}");
 
-isMatch('src/components/header/index.js') //=> true
-isMatch('src/README.md') //=> false
+isMatch("src/components/header/index.js"); //=> true
+isMatch("src/README.md"); //=> false
 ```
 
 ## Why outmatch?
