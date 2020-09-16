@@ -57,11 +57,25 @@ isMatch("src/README.md"); //=> false
 
 ## Install
 
+#### npm
+
 ```
 npm install outmatch
 ```
 
-or use directly from a CDN:
+#### Yarn
+
+```
+yarn add outmatch
+```
+
+#### pnpm
+
+```
+pnpm install outmatch
+```
+
+#### CDN
 
 - [jsDelivr](https://www.jsdelivr.com/package/npm/outmatch)
 - [unpkg](https://unpkg.com/outmatch)
