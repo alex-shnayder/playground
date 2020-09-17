@@ -102,19 +102,19 @@ pnpm install outmatch
 
 ## Syntax
 
-Wildcard                       | Matches | Description
------------------------------- | ------- | ------------------------------
-`?`                            |         | Matches exactly one arbitrary character (excluding separators if specified in options)
-`*`                            |         | Matches zero or more arbitrary characters (excluding separators if specified in options)
-`**`                           |         | If a separator is specified in options, matches any number of segments when used as a whole segment (`/**/` in the middle, `**/` at the beginning or `/**` at the end of a separated string)
-`[a2_]`                        | `a`,&nbsp;`2`,&nbsp;`_` | Matches any single character from the specified list ()
-`[a-z]`<br>`[0-9]`             | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9` | Matches any single character from the specified range
-`[!abc]`<br>`[!f-k]`           | not&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>not&nbsp;lowercase&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | Matches any character _not_ in the list or range
-`@(bar\|baz\|qux)`             | `bar`,&nbsp;`baz`,&nbsp;`qux` | Matches one of the given subpatterns exactly one time
-`?(foo)`<br>`?(bar\|baz\|qux)` | empty&nbsp;string,&nbsp;`foo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`baz`,&nbsp;`qux` | Matches one of the given subpatterns zero or one time 
-`*(foo)`<br>`*(bar\|baz\|qux)` | empty&nbsp;string,&nbsp;`foo`,&nbsp;`foofoofoo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`qux`,&nbsp;`bazbaz`,&nbsp;`barquxbaz` | Matches one of the given subpatterns zero or more times
-`+(foo)`<br>`+(bar\|baz\|qux)` | `foo`,&nbsp;`foofoofoo`<br>`bar`,&nbsp;`qux`,&nbsp;`bazbaz`,&nbsp;`barquxbaz` | Matches one of the given subpatterns one or more times
-`!(foo)`<br>`!(bar\|baz\|qux)` | any&nbsp;string&nbsp;except&nbsp;`foo`<br>any&nbsp;string&nbsp;except&nbsp;`bar`,&nbsp;`baz`,&nbsp;`qux` | Matches anything except for the given subpatterns
+Wildcard                  | Matches | Description
+--------------------------| ------- | ------------------------------
+`?`                       |         | Matches exactly one arbitrary character (excluding separators if specified in options)
+`*`                       |         | Matches zero or more arbitrary characters (excluding separators if specified in options)
+`**`                      |         | If a separator is specified in options, matches any number of segments when used as a whole segment (`/**/` in the middle, `**/` at the beginning or `/**` at the end of a separated string)
+`[a2_]`                   | `a`,&nbsp;`2`,&nbsp;`_` | Matches any single character from the specified list ()
+`[a-z]`<br>`[0-9]`        | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9` | Matches any single character from the specified range
+`[!abc]`<br>`[!f-k]`      | not&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>not&nbsp;lowercase&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | Matches any character _not_ in the list or range
+`@(bar\|baz)`             | `bar`,&nbsp;`baz` | Matches one of the given subpatterns exactly one time
+`?(foo)`<br>`?(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`baz` | Matches one of the given subpatterns zero or one time 
+`*(foo)`<br>`*(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`,&nbsp;`foofoofoo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz` | Matches one of the given subpatterns zero or more times
+`+(foo)`<br>`+(bar\|baz)` | `foo`,&nbsp;`foofoofoo`<br>`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz` | Matches one of the given subpatterns one or more times
+`!(foo)`<br>`!(bar\|baz)` | any&nbsp;string&nbsp;except&nbsp;`foo`<br>any&nbsp;string&nbsp;except&nbsp;`bar`,&nbsp;`baz` | Matches anything except for the given subpatterns
 
 ## Comparison
 
