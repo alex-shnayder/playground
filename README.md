@@ -21,6 +21,12 @@ Glob patterns are strings that contain wildcards such as `*`, `?`, `[abc]` and o
 
 Globs are usually used to search file paths separated by slashes. With Outmatch it is possible to match _arbitrary_ strings, whether separated or not.
 
+## Quickstart
+
+```
+npm install outmatch
+```
+
 ```js
 import outmatch from 'outmatch'
 
@@ -29,7 +35,7 @@ const isMatch = outmatch('src/**/*.{js,ts}')
 isMatch('src/components/header/index.js') //=> true
 isMatch('src/README.md') //=> false
 
-isMatch.regExp //=> /^(src((?!\.) … ((?!).)*\.ts)$/
+isMatch.regExp //=> /^(src((?!\.) ... ((?!).)*\.ts)$/
 isMatch.pattern //=> 'src/**/*.{js,ts}'
 isMatch.options //=> { separator: true }
 ```
