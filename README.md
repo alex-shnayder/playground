@@ -19,13 +19,15 @@ Outmatch takes one or more glob patterns, compiles them into a RegExp and return
 
 Glob patterns are strings that contain wildcards such as `*`, `?`, `[abc]` and others. When a pattern is matched with another string, these wildcards can replace one or more symbols. For example, `src/*` would match both `src/foo` and `src/bar`.
 
-Globs are usually used to search file paths separated by slashes. With Outmatch it is possible to match _arbitrary_ strings, whether separated or not.
+While globs are usually used to search file paths separated by slashes, with Outmatch it is possible to match _arbitrary_ strings, whether separated or not.
 
 ## Quickstart
 
 ```
 npm install outmatch
 ```
+
+For more installation options, see the [corresponding section](#installation).
 
 ```js
 import outmatch from 'outmatch'
