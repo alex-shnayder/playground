@@ -102,19 +102,31 @@ pnpm install outmatch
 
 ## Syntax
 
-Wildcard                  | Matches | Description
---------------------------| ------- | ------------------------------
-`?`                       |         | Matches exactly one arbitrary character (excluding separators if specified in options)
-`*`                       |         | Matches zero or more arbitrary characters (excluding separators if specified in options)
-`**`                      |         | If a separator is specified in options, matches any number of segments when used as a whole segment (`/**/` in the middle, `**/` at the beginning or `/**` at the end of a separated string)
-`[a2_]`                   | `a`,&nbsp;`2`,&nbsp;`_` | Matches any single character from the specified list ()
-`[a-z]`<br>`[0-9]`        | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9` | Matches any single character from the specified range
-`[!abc]`<br>`[!f-k]`      | not&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>not&nbsp;lowercase&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | Matches any character _not_ in the list or range
-`@(bar\|baz)`             | `bar`,&nbsp;`baz` | Matches one of the given subpatterns exactly one time
-`?(foo)`<br>`?(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`baz` | Matches one of the given subpatterns zero or one time 
-`*(foo)`<br>`*(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`,&nbsp;`foofoofoo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz` | Matches one of the given subpatterns zero or more times
-`+(foo)`<br>`+(bar\|baz)` | `foo`,&nbsp;`foofoofoo`<br>`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz` | Matches one of the given subpatterns one or more times
-`!(foo)`<br>`!(bar\|baz)` | any&nbsp;string&nbsp;except&nbsp;`foo`<br>any&nbsp;string&nbsp;except&nbsp;`bar`,&nbsp;`baz` | Matches anything except for the given subpatterns
+### Basic wildcards
+
+Wildcard | Description
+-------- | ------------
+`?`      | Exactly one arbitrary character (excluding separators if specified in options)
+`*`      | Zero or more arbitrary characters (excluding separators if specified in options)
+`**`     | If a separator is specified in options, matches any number of segments when used as a whole segment (`/**/` in the middle, `**/` at the beginning or `/**` at the end of a separated string)
+
+### Character Classes
+
+Class                | Matches                                                                                                                                        | Description
+-------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -----------
+`[a2_]`              | `a`,&nbsp;`2`,&nbsp;`_`                                                                                                                        | Any single character from the specified list ()
+`[a-z]`<br>`[0-9]`   | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9`                                     | Any single character from the specified range
+`[!abc]`<br>`[!f-k]` | any&nbsp;character&nbsp;except&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>any&nbsp;character&nbsp;except&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | Any character _not_ in the list or range
+
+### Extglobs
+
+Extglob                   | Matches                                                                                                        | Description
+------------------------- | ---------------------------------------------------------------------------------------------------------------| -----------
+`@(bar\|baz)`             | `bar`,&nbsp;`baz`                                                                                              | One of the given subpatterns exactly one time
+`?(foo)`<br>`?(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`baz`                                     | One of the given subpatterns zero or one time 
+`*(foo)`<br>`*(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`,&nbsp;`foofoofoo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz` | One of the given subpatterns zero or more times
+`+(foo)`<br>`+(bar\|baz)` | `foo`,&nbsp;`foofoofoo`<br>`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz`                                                 | One of the given subpatterns one or more times
+`!(foo)`<br>`!(bar\|baz)` | any&nbsp;string&nbsp;except&nbsp;`foo`<br>any&nbsp;string&nbsp;except&nbsp;`bar`,&nbsp;`baz`                   | Anything except for the given subpatterns
 
 ## Comparison
 
