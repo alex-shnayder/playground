@@ -114,9 +114,9 @@ Wildcard | Description
 
 Class                | Matches                                                                                                                                        | Description
 -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -----------
-`[a2_]`              | `a`,&nbsp;`2`,&nbsp;`_`                                                                                                                        | Any single character from the specified list ()
-`[a-z]`<br>`[0-9]`   | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9`                                     | Any single character from the specified range
-`[!abc]`<br>`[!f-k]` | any&nbsp;character&nbsp;except&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>any&nbsp;character&nbsp;except&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | Any character _not_ in the list or range
+`[a2_]`              | `a`,&nbsp;`2`,&nbsp;`_`                                                                                                                        | When there are multiple characters in brackets, the class will match any single character from the specified list
+`[a-z]`<br>`[0-9]`   | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9`                                     | When two characters in brackets are separated by a hyphen, the class will match any single character from the specified range
+`[!abc]`<br>`[!f-k]` | any&nbsp;character&nbsp;except&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>any&nbsp;character&nbsp;except&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | When the first character in brackets is an exclamation mark, the class will match any single character _not_ in the list or range
 
 ### Extglobs
 
