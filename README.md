@@ -55,6 +55,8 @@ isMatch("src/README.md"); //=> false
   </tr>
 </table>
 
+For detailed comparison with the alternatives, see the [corresponding section](#comparison).
+
 ## Install
 
 Outmatch is distributed via the [npm package registry](https://www.npmjs.com/). It can be installed using one of the compatible package managers or included directly from a CDN.
@@ -81,6 +83,10 @@ pnpm install outmatch
 
 - [jsDelivr](https://www.jsdelivr.com/package/npm/outmatch)
 - [unpkg](https://unpkg.com/outmatch)
+
+## Comparison
+
+¯\_(ツ)_/¯
 
 ## License
 
