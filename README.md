@@ -17,9 +17,11 @@
 
 Outmatch takes one or more glob patterns, compiles them into a RegExp and returns a function for matching strings with it.
 
-Glob patterns are strings that contain wildcards such as `*`, `?`, `[abc]` and others. When a pattern is matched with another string, these wildcards can replace one or more symbols. For example, `src/*` would match both `src/foo` and `src/bar`. 
+Glob patterns are strings that contain wildcards such as `*`, `?`, `[abc]` and others. When a pattern is matched with another string, these wildcards can replace one or more symbols. For example, `src/*` would match both `src/foo` and `src/bar`.
 
-Globs are usually used to search files. With Outmatch it is possible to use globs with arbitrary strings, whether separated or not.
+Globs are usually used to search file paths separated by slashes. With Outmatch it is possible to match _arbitrary_ strings, whether separated or not.
+
+## Quickstart
 
 ```js
 import outmatch from 'outmatch'
@@ -28,6 +30,10 @@ const isMatch = outmatch('src/**/*.{js,ts}')
 
 isMatch('src/components/header/index.js') //=> true
 isMatch('src/README.md') //=> false
+
+isMatch.regExp //=> /^(src((?!\.)&nbsp;…&nbsp;((?!).)*\.ts)$/
+isMatch.pattern //=> 'src/**/*.{js,ts}'
+isMatch.options //=> { separator: true }
 ```
 
 ## Why outmatch?
@@ -65,19 +71,19 @@ For detailed comparison with the alternatives, see the [corresponding section](#
 
 Outmatch is distributed via the npm package registry. It can be installed using one of the compatible package managers or included directly from a CDN.
 
-#### [npm](https://www.npmjs.com/)
+#### [npm](https://www.npmjs.com)
 
 ```
 npm install outmatch
 ```
 
-#### [Yarn](https://yarnpkg.com/)
+#### [Yarn](https://yarnpkg.com)
 
 ```
 yarn add outmatch
 ```
 
-#### [pnpm](https://pnpm.js.org/)
+#### [pnpm](https://pnpm.js.org)
 
 ```
 pnpm install outmatch
