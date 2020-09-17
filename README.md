@@ -106,19 +106,23 @@ pnpm install outmatch
 
 Wildcard | Description
 -------- | ------------
-`?`      | Exactly one arbitrary character (excluding separators if specified in options)
-`*`      | Zero or more arbitrary characters (excluding separators if specified in options)
-`**`     | If a separator is specified in options, matches any number of segments when used as a whole segment (`/**/` in the middle, `**/` at the beginning or `/**` at the end of a separated string)
+`?`      | Matches exactly one arbitrary character (excluding separators if specified in options)
+`*`      | Matches zero or more arbitrary characters (excluding separators if specified in options)
+`**`     | Has a special meaning only if the `separator` property in options is not `false`. Matches any number of segments when used as a whole segment (`/**/` in the middle, `**/` at the beginning or `/**` at the end of a separated string)
 
 ### Character Classes
 
+Character classes are defined by one or more symbols surrounded by square brackets. One class always matches exactly one character.
+
 Class                | Matches                                                                                                                                        | Description
 -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -----------
-`[a2_]`              | `a`,&nbsp;`2`,&nbsp;`_`                                                                                                                        | When there are multiple characters in brackets, the class will match any single character from the specified list
-`[a-z]`<br>`[0-9]`   | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9`                                     | When two characters in brackets are separated by a hyphen, the class will match any single character from the specified range
-`[!abc]`<br>`[!f-k]` | any&nbsp;character&nbsp;except&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>any&nbsp;character&nbsp;except&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | When the first character in brackets is an exclamation mark, the class will match any single character _not_ in the list or range
+`[a2_]`              | `a`,&nbsp;`2`,&nbsp;`_`                                                                                                                        | If there are multiple characters in brackets, the class will match any single character from the specified list
+`[a-z]`<br>`[0-9]`   | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9`                                     | If two characters in brackets are separated by a hyphen, the class will match any single character from the specified range
+`[!abc]`<br>`[!f-k]` | any&nbsp;character&nbsp;except&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>any&nbsp;character&nbsp;except&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | If the first character in brackets is an exclamation mark, the class will match any single character _not_ in the list or range
 
 ### Extglobs
+
+Extglobs (or extended glob patterns) represent a choice of alternatives repeated a certain number of times.
 
 Extglob                   | Matches                                                                                                        | Description
 ------------------------- | ---------------------------------------------------------------------------------------------------------------| -----------
