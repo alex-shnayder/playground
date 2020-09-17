@@ -57,9 +57,9 @@ isMatch("src/README.md"); //=> false
 
 For detailed comparison with the alternatives, see the [corresponding section](#comparison).
 
-## Install
+## Installation
 
-Outmatch is distributed via the [npm package registry](https://www.npmjs.com/). It can be installed using one of the compatible package managers or included directly from a CDN.
+Outmatch is distributed via the npm package registry. It can be installed using one of the compatible package managers or included directly from a CDN.
 
 #### [npm](https://www.npmjs.com/)
 
