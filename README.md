@@ -59,19 +59,19 @@ isMatch("src/README.md"); //=> false
 
 Outmatch is distributed via the [npm package registry](https://www.npmjs.com/). It can be installed using one of the compatible package managers or included directly from a CDN.
 
-#### npm
+#### [npm](https://www.npmjs.com/)
 
 ```
 npm install outmatch
 ```
 
-#### Yarn
+#### [Yarn](https://yarnpkg.com/)
 
 ```
 yarn add outmatch
 ```
 
-#### pnpm
+#### [pnpm](https://pnpm.js.org/)
 
 ```
 pnpm install outmatch
