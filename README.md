@@ -122,7 +122,7 @@ Class                | Matches                                                  
 
 ### Extglobs
 
-Extglobs (or extended glob patterns) represent a choice of alternatives repeated a certain number of times.
+Extended glob patterns represent a choice of alternatives repeated a certain number of times.
 
 Extglob                   | Matches                                                                                                        | Description
 ------------------------- | ---------------------------------------------------------------------------------------------------------------| -----------
@@ -135,6 +135,8 @@ Extglob                   | Matches                                             
 ### Braces
 
 ### Escaping
+
+Any special character can be escaped by preceding it with a backslash (`\\`).
 
 ### Negation
 
