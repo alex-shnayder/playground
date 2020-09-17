@@ -47,7 +47,7 @@ More details are available in the [Installation](#installation) and [Usage](#usa
 <table>
   <tr>
     <td align="center">💪</td>
-    <td><b>Powerful</b><br>Supports extended globbing, multi-pattern compilation and custom path separators, which are a unique feature of this library</td>
+    <td><b>Powerful</b><br>Supports extended globbing, brace expansion, multi-pattern compilation and custom path separators, which are a unique feature of this library</td>
   </tr>
   <tr>
     <td align="center">🏎</td>
@@ -131,6 +131,12 @@ Extglob                   | Matches                                             
 `*(foo)`<br>`*(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`,&nbsp;`foofoofoo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz` | One of the given subpatterns zero or more times
 `+(foo)`<br>`+(bar\|baz)` | `foo`,&nbsp;`foofoofoo`<br>`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz`                                                 | One of the given subpatterns one or more times
 `!(foo)`<br>`!(bar\|baz)` | any&nbsp;string&nbsp;except&nbsp;`foo`<br>any&nbsp;string&nbsp;except&nbsp;`bar`,&nbsp;`baz`                   | Anything except for the given subpatterns
+
+### Braces
+
+### Escaping
+
+### Negation
 
 ## Comparison
 
