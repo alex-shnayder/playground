@@ -17,13 +17,17 @@
 
 Outmatch takes one or more glob patterns, compiles them into a RegExp and returns a function for matching strings with it.
 
+Glob patterns are strings that contain wildcards such as `*`, `?`, `[abc]` and others. When a pattern is matched with another string, these wildcards can replace one or more symbols. For example, `src/*` would match both `src/foo` and `src/bar`. 
+
+Globs are usually used to search files. With Outmatch it is possible to use globs with arbitrary strings, whether separated or not.
+
 ```js
-import outmatch from "outmatch";
+import outmatch from 'outmatch'
 
-const isMatch = outmatch("src/**/*.{js,ts}");
+const isMatch = outmatch('src/**/*.{js,ts}')
 
-isMatch("src/components/header/index.js"); //=> true
-isMatch("src/README.md"); //=> false
+isMatch('src/components/header/index.js') //=> true
+isMatch('src/README.md') //=> false
 ```
 
 ## Why outmatch?
@@ -86,7 +90,7 @@ pnpm install outmatch
 
 ## Comparison
 
-¯\_(ツ)_/¯
+Coming soon.
 
 ## License
 
