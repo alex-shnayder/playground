@@ -136,9 +136,35 @@ Extglob                   | Matches                                             
 
 ### Escaping
 
-Any special character can be escaped by preceding it with a backslash (`\\`).
+Preceding a special character with a backslash `\` will escape the character making it be treated literally:
+
+```js
+const isMatch = outmatch('foo\?*')
+
+isMatch('foo?') //=> true
+isMatch('foob') //=> false
+```
 
 ### Negation
+
+Patterns can be negated by putting an exclamation mark `!` at the beginning. A negated pattern matches any string that doesn't match the part after the `!`:
+
+```js
+const isMatch = outmatch('!src/*')
+
+isMatch('foo') //=> true
+isMatch('src/foo/bar') //=> true
+isMatch('src/foo') //=> false
+```
+
+When put in an array among positive patterns, negated patterns effectively work as ignores:
+
+```js
+const isMatch = outmatch(['src/*', '!src/bar'])
+
+isMatch('src/foo') //=> true
+isMatch('src/bar') //=> false
+```
 
 ## Comparison
 
