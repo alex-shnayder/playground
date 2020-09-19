@@ -125,66 +125,70 @@ pnpm install outmatch
   </tr>
   <tr>
     <td><code>**</code></td>    
-    <td>Matches any number of segments when used as a whole segment in a separated pattern</td>
+    <td>Matches any number of segments when used as a whole segment in a separated pattern (e.g. <code>/**/</code> if <code>/</code> is the separator)</td>
   </tr>
   <tr>
     <td colspan="2"><strong>Character classes</strong></td>
   </tr>
   <tr>
     <td><code>[abc1_]</code></td>    
-    <td>If there are multiple characters in brackets, the class will match any single character from the specified list</td>
+    <td>Match a single character from the specified list of characters</td>
   </tr>  
   <tr>
     <td><code>[a-z]</code><br><code>[0-9]</code></td>    
-    <td>If two characters in brackets are separated by a hyphen, the class will match any single character from the specified range</td>
+    <td>Matches a single character from the specified range of characters</td>
   </tr>  
   <tr>
     <td><code>[!abc]</code><br><code>[!f-k]</code></td>    
-    <td>If the first character in brackets is an exclamation mark, the class will match any single character _not_ in the list or range</td>
+    <td>Match a single character _not_ in the specified list or range</td>
   </tr> 
   <tr>
     <td colspan="3"><strong>Extglobs</strong></td>
   </tr>
   <tr>
     <td><code>@(bar|baz)</code></td>
-    <td>One of the given subpatterns exactly one time</td>
+    <td>Matches one of the given subpatterns exactly one time</td>
   </tr>   
   <tr>
     <td><code>?(foo)</code><br><code>?(bar|baz)</code></td>
-    <td>One of the given subpatterns zero or one time</td>
+    <td>Matches one of the given subpatterns zero or one time</td>
   </tr>    
   <tr>
     <td><code>*(foo)</code><br><code>*(bar|baz)</code></td>
-    <td>One of the given subpatterns zero or more times</td>
+    <td>Matches one of the given subpatterns zero or more times</td>
   </tr>    
   <tr>
     <td><code>+(foo)</code><br><code>+(bar|baz)</code></td>
-    <td>One of the given subpatterns one or more times</td>
+    <td>Matches one of the given subpatterns one or more times</td>
   </tr>    
   <tr>
     <td><code>!(foo)</code><br><code>!(bar|baz)</code></td>
-    <td>Anything except for the given subpatterns</td>
+    <td>Matches anything except for the given subpatterns</td>
   </tr>
   <tr>
     <td colspan="2"><strong>Braces</strong></td>
   </tr>
   <tr>
-    <td><code>{bar,baz}</code><br><code>`{1..5}`</code></td>
-    <td>Brace expansion is a feature of Bash that generates a list of strings from a single source pattern. In the pattern, parts that should differ between the strings are put in curly braces, and the rest is left intact. For example, `src/{foo,bar}/baz` would be expanded to two strings, `src/foo/baz` and `src/bar/baz`.</td>
+    <td><code>{bar,baz}</code></td>
+    <td>Expands the pattern to an array of patterns. For example, <code>outmatch('src/{foo,bar}/baz')</code> is equivalent to <code>outmatch(['src/foo/baz', 'src/bar/baz'])</code></td>
   </tr>
+  <tr>
+    <td><code>{1..5}</code></td>
+    <td>Matches any character in the specified range
+  </tr>  
   <tr>
     <td colspan="2"><strong>Negation</strong></td>      
   </tr>
   <tr>
-    <td><code>!foo</code></td>
-    <td>Patterns can be negated by putting an exclamation mark `!` at the beginning. A negated pattern matches any string that doesn't match the part after the `!`. When put in an array among positive patterns, negated patterns effectively work as ignores.</td>
+    <td><code>!</code></td>
+    <td>Negates a pattern when put at the start of it. A negated pattern matches any string that doesn't match the part after the <code>!</code>. When put in an array among positive patterns, negated patterns effectively work as ignores.<br>If repeated multiple times, so <code>!!foo/bar</code> is the same as <code>foo/bar</code> and <code>!!!baz/qux</code> is the same as <code>!baz/qux</code>.</td>
   </tr>
   <tr>
     <td colspan="2"><strong>Escaping</strong></td>
   </tr>
   <tr>
     <td><code>\</code></td>
-    <td>Preceding a special character with a backslash `\` escapes the character making it be treated literally</td>
+    <td>Escapes the following character making it be treated literally</td>
   </tr>      
 </table>
 
