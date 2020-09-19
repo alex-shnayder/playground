@@ -129,7 +129,7 @@ pnpm install outmatch
   </tr>
   <tr>
     <td><code>[abc1_]</code></td>    
-    <td>Match a single character from the specified list of characters</td>
+    <td>Matches a single character from the specified list of characters</td>
   </tr>  
   <tr>
     <td><code>[a-z]</code><br><code>[0-9]</code></td>    
@@ -137,7 +137,7 @@ pnpm install outmatch
   </tr>  
   <tr>
     <td><code>[!abc]</code><br><code>[!f-k]</code></td>    
-    <td>Match a single character <em>not</em> in the specified list or range</td>
+    <td>Matches a single character <em>not</em> in the specified list or range</td>
   </tr> 
   <tr>
     <td colspan="3"><strong>Extglobs</strong></td>
@@ -178,7 +178,7 @@ pnpm install outmatch
   </tr>
   <tr>
     <td><code>!</code></td>
-    <td>Negates a pattern when put at the start of it. If repeated multiple times, each <code>!</code> will invert the effect, so <code>!!foo/bar</code> is the same as <code>foo/bar</code> and <code>!!!baz/qux</code> is the same as <code>!baz/qux</code>.<br><br>A negated pattern matches any string that doesn't match the part after the <code>!</code>. When put in an array among positive patterns, negated patterns effectively work as ignores.</td>
+    <td>Negates a pattern when put at the start of it. If repeated multiple times, each <code>!</code> will invert the effect, so <code>!!foo/bar</code> is the same as <code>foo/bar</code> and <code>!!!baz/qux</code> is the same as <code>!baz/qux</code>.<br><br>A negated pattern matches any string that doesn't match the part after the <code>!</code>. When put in an array among positive patterns, negated patterns effectively work as ignores</td>
   </tr>
   <tr>
     <td colspan="2"><strong>Escaping</strong></td>
