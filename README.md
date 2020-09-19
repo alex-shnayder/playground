@@ -102,9 +102,6 @@ pnpm install outmatch
 
 ## Usage
 
-### Separators
-
-
 ### Syntax
 
 <table>
@@ -147,19 +144,19 @@ pnpm install outmatch
   </tr>
   <tr>
     <td><code>@(bar|baz)</code></td>
-    <td>Matches one of the given subpatterns exactly one time</td>
+    <td>Matches one of the given subpatterns repeated exactly one time</td>
   </tr>   
   <tr>
     <td><code>?(foo)</code><br><code>?(bar|baz)</code></td>
-    <td>Matches one of the given subpatterns zero or one time</td>
+    <td>Matches one of the given subpatterns repeated zero or one time</td>
   </tr>    
   <tr>
     <td><code>*(foo)</code><br><code>*(bar|baz)</code></td>
-    <td>Matches one of the given subpatterns zero or more times</td>
+    <td>Matches one of the given subpatterns repeated zero or more times</td>
   </tr>    
   <tr>
     <td><code>+(foo)</code><br><code>+(bar|baz)</code></td>
-    <td>Matches one of the given subpatterns one or more times</td>
+    <td>Matches one of the given subpatterns repeated one or more times</td>
   </tr>    
   <tr>
     <td><code>!(foo)</code><br><code>!(bar|baz)</code></td>
