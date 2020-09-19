@@ -100,7 +100,11 @@ pnpm install outmatch
 - [jsDelivr](https://www.jsdelivr.com/package/npm/outmatch)
 - [unpkg](https://unpkg.com/outmatch)
 
-## Syntax
+## Usage
+
+### Separators
+
+
 
 ### Basic Wildcards
 
@@ -171,10 +175,10 @@ isMatch('@(foo|bar/baz)') //=> true
 
 Brace expansion is a feature of Bash that generates a list of strings from a single source pattern. In the pattern, parts that should differ between the strings are put in curly braces, and the rest is left intact. For example, `src/{foo,bar}/baz` would be expanded to two strings, `src/foo/baz` and `src/bar/baz`.
 
-Pattern     | Matches                       | Description
------------ | ------------------------------| -----------
-`{bar,baz}` | `bar`,&nbsp;`baz`             | Matches one of the subpatterns
-`{1..5}`    | 1,&nbsp2,&nbsp3,&nbsp4,&nbsp5 | Matches any number from the range
+Pattern     | Matches                           | Description
+----------- | --------------------------------- | -----------
+`{bar,baz}` | `bar`,&nbsp;`baz`                 | Matches one of the subpatterns
+`{1..5}`    | 1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5 | Matches any number from the range
 
 This feature is similar to extglobs, but they work differently. Extglobs are converted to RegExp groups (`@(bar|baz)` → `(bar|baz)`) while braces expand a single pattern into an array of patterns, so `outmatch('foo/{bar,baz}')` becomes `outmatch(['foo/bar', 'foo/baz'])`. 
 
@@ -231,6 +235,28 @@ isMatch('src/bar') //=> false
 ```
 
 Exclamation marks can be repeated multiple times. Each mark will invert the pattern, so `!!foo/bar` is the same as `foo/bar` and `!!!baz/qux` is the same as `!baz/qux`.
+
+## API
+
+### outmatch(patterns, options?): isMatch
+
+Takes a single pattern string or an array of patterns and compiles them into a regular expression. Returns an isMatch function that takes a sample string as its only argument and returns true if the string matches the patterns.
+
+### isMatch(sample): boolean
+
+Tests if a sample string matches the patterns that were used to compile the regular expression and create this function.
+
+### isMatch.regExp
+
+The compiled regular expression.
+
+### isMatch.pattern
+
+The original pattern or array of patterns that was used to compile the regular expression and create the isMatch function.
+
+### isMatch.options
+
+The options object that was used to compile the regular expression and create the isMatch function.
 
 ## Comparison
 
