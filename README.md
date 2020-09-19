@@ -109,6 +109,10 @@ pnpm install outmatch
 
 <table>
   <tr>
+    <th>Pattern</th>
+    <th>Description</th>
+  </tr>
+  <tr>
     <td><code>?</code></td>    
     <td>Matches exactly one arbitrary character excluding separators</td>
   </tr>  
@@ -177,7 +181,7 @@ pnpm install outmatch
   </tr>
   <tr>
     <td><code>!</code></td>
-    <td>Negates a pattern when put at the start of it. A negated pattern matches any string that doesn't match the part after the <code>!</code>. When put in an array among positive patterns, negated patterns effectively work as ignores.<br>If repeated multiple times, so <code>!!foo/bar</code> is the same as <code>foo/bar</code> and <code>!!!baz/qux</code> is the same as <code>!baz/qux</code>.</td>
+    <td>Negates a pattern when put at the start of it. A negated pattern matches any string that doesn't match the part after the <code>!</code>. When put in an array among positive patterns, negated patterns effectively work as ignores.<br>If repeated multiple times, each `!` will invert the effect, so <code>!!foo/bar</code> is the same as <code>foo/bar</code> and <code>!!!baz/qux</code> is the same as <code>!baz/qux</code>.</td>
   </tr>
   <tr>
     <td colspan="2"><strong>Escaping</strong></td>
