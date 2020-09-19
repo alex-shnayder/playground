@@ -105,64 +105,79 @@ pnpm install outmatch
 ### Separators
 
 
+### Syntax
 
-### Basic Wildcards
-
-Pattern                    | Matches | Description
--------------------------- | ------- | -----------
-`?`                        |         | Matches exactly one arbitrary character excluding separators
-`*`                        |         | Matches zero or more arbitrary characters excluding separators
-`**`                       |         | Matches any number of segments when used as a whole segment in a separated pattern
-__Character&nbsp;classes__ |
-`[a2_]`                    | `a`,&nbsp;`2`,&nbsp;`_`                                                                                                                        | If there are multiple characters in brackets, the class will match any single character from the specified list
-`[a-z]`<br>`[0-9]`         | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9`                                     | If two characters in brackets are separated by a hyphen, the class will match any single character from the specified range
-`[!abc]`<br>`[!f-k]`       | any&nbsp;character&nbsp;except&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>any&nbsp;character&nbsp;except&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | If the first character in brackets is an exclamation mark, the class will match any single character _not_ in the list or range
-
-
-### Globstars
-
-If the `separator` option is not `false` and a pattern contains separators, two consecutive stars have a special meaning when they are used as a whole segment (e.g. `/**/` if `/` is the separator).
-
-Pattern | Description
-------- | -----------
-
-
-```js
-const isMatch = outmatch('src/**/baz')
-
-isMatch('src/baz') //=> true
-isMatch('src/foo/baz') //=> true
-isMatch('src/foo/bar/baz') //=> true
-isMatch('src/foo') //=> false (lacks 'baz' at the end)
-```
-
-### Character Classes
-
-Character classes are defined by one or more symbols surrounded by square brackets. One class always matches exactly one character.
-
-
-
-### Extglobs
-
-Extended glob patterns represent a choice of alternatives repeated a certain number of times.
-
-Pattern                   | Matches                                                                                                        | Description
-------------------------- | ---------------------------------------------------------------------------------------------------------------| -----------
-`@(bar\|baz)`             | `bar`,&nbsp;`baz`                                                                                              | One of the given subpatterns exactly one time
-`?(foo)`<br>`?(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`baz`                                     | One of the given subpatterns zero or one time 
-`*(foo)`<br>`*(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`,&nbsp;`foofoofoo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz` | One of the given subpatterns zero or more times
-`+(foo)`<br>`+(bar\|baz)` | `foo`,&nbsp;`foofoofoo`<br>`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz`                                                 | One of the given subpatterns one or more times
-`!(foo)`<br>`!(bar\|baz)` | any&nbsp;string&nbsp;except&nbsp;`foo`<br>any&nbsp;string&nbsp;except&nbsp;`bar`,&nbsp;`baz`                   | Anything except for the given subpatterns
-
-Strings are split by separators _before_ extglobs are processed, so extglobs with separators inside will also be split and won't be recognized:
-
-```js
-const isMatch = outmatch('@(foo|bar/baz)')
-
-isMatch('foo') //=> false
-isMatch('bar/baz') //=> false
-isMatch('@(foo|bar/baz)') //=> true
-```
+<table>
+  <tr>
+    <th>Pattern</th>
+    <th>Matches</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>?</code></td>    
+    <td></td>
+    <td>Matches exactly one arbitrary character excluding separators</td>
+  </tr>  
+  <tr>
+    <td><code>*</code></td>    
+    <td></td>
+    <td>Matches zero or more arbitrary characters excluding separators</td>
+  </tr>  
+  <tr>
+    <td colspan="3"><strong>Globstar</strong><br>If the `separator` option is not `false` and a pattern contains separators, two consecutive stars have a special meaning when they are used as a whole segment (e.g. `/**/` if `/` is the separator)</td>
+  </tr>
+  <tr>
+    <td><code>**</code></td>    
+    <td></td>
+    <td>Matches any number of segments when used as a whole segment in a separated pattern</td>
+  </tr>
+  <tr>
+    <td colspan="3"><strong>Character classes</strong><br>Represent a single character defined by a sequence or range of characters in square brackets</td>
+  </tr>
+  <tr>
+    <td><code>[abc1_]</code></td>
+    <td><code>a</code>,&nbsp;<code>b</code>,&nbsp;<code>c</code>,&nbsp;<code>2</code>,&nbsp;<code>_</code></td>
+    <td>If there are multiple characters in brackets, the class will match any single character from the specified list</td>
+  </tr>  
+  <tr>
+    <td><code>[a-z]</code><br><code>[0-9]</code></td>
+    <td>any&nbsp;letter&nbsp;from&nbsp;<code>a</code>&nbsp;to&nbsp;<code>z</code><br>any&nbsp;number&nbsp;from&nbsp;<code>0</code>&nbsp;to&nbsp;<code>9</code></td>
+    <td>If two characters in brackets are separated by a hyphen, the class will match any single character from the specified range</td>
+  </tr>  
+  <tr>
+    <td><code>[!abc]</code><br><code>[!f-k]</code></td>
+    <td>any&nbsp;character&nbsp;except&nbsp;<code>a</code>,&nbsp;<code>b</code>,&nbsp;<code>c</code><br>any&nbsp;character&nbsp;except&nbsp;letters&nbsp;from&nbsp;<code>f</code>&nbsp;to&nbsp;<code>k</code></td>
+    <td>If the first character in brackets is an exclamation mark, the class will match any single character _not_ in the list or range</td>
+  </tr> 
+  <tr>
+    <td colspan="3"><strong>Extglobs</strong><br>Extended glob patterns represent a choice of alternatives repeated a certain number of times.</td>
+  </tr>  
+  <tr>
+    <td><code>@(bar|baz)</code></td>
+    <td><code>bar</code>,&nbsp;<code>baz</code></td>
+    <td>One of the given subpatterns exactly one time</td>
+  </tr>   
+  <tr>
+    <td><code>?(foo)</code><br><code>?(bar|baz)</code></td>
+    <td>empty&nbsp;string,&nbsp;<code>foo</code><br>empty&nbsp;string,&nbsp;<code>bar</code>,&nbsp;<code>baz</code></td>
+    <td>One of the given subpatterns zero or one time</td>
+  </tr>    
+  <tr>
+    <td><code>*(foo)</code><br><code>*(bar|baz)</code></td>
+    <td>empty&nbsp;string,&nbsp;<code>foo</code>,&nbsp;<code>foofoofoo</code><br>empty&nbsp;string,&nbsp;<code>bar</code>,&nbsp;<code>bazbaz</code>,&nbsp;<code>barbaz</code></td>
+    <td>One of the given subpatterns zero or more times</td>
+  </tr>    
+  <tr>
+    <td><code>+(foo)</code><br><code>+(bar|baz)</code></td>
+    <td><code>foo</code>,&nbsp;<code>foofoofoo</code><br><code>bar</code>,&nbsp;<code>bazbaz</code>,&nbsp;<code>barbaz</code></td>
+    <td>One of the given subpatterns one or more times</td>
+  </tr>    
+  <tr>
+    <td><code>!(foo)</code><br><code>!(bar|baz)</code></td>
+    <td>any&nbsp;string&nbsp;except&nbsp;<code>foo</code><br>any&nbsp;string&nbsp;except&nbsp;<code>bar</code>,&nbsp;<code>baz</code></td>
+    <td>Anything except for the given subpatterns</td>
+  </tr>
+</table>
 
 ### Braces
 
