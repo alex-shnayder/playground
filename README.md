@@ -102,9 +102,9 @@ pnpm install outmatch
 
 ## Syntax
 
-### Basic wildcards
+### Basic Wildcards
 
-Wildcard | Description
+Pattern  | Description
 -------- | ------------
 `?`      | Matches exactly one arbitrary character (excluding separators if specified in options)
 `*`      | Matches zero or more arbitrary characters (excluding separators if specified in options)
@@ -114,7 +114,7 @@ Wildcard | Description
 
 Character classes are defined by one or more symbols surrounded by square brackets. One class always matches exactly one character.
 
-Class                | Matches                                                                                                                                        | Description
+Pattern              | Matches                                                                                                                                        | Description
 -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -----------
 `[a2_]`              | `a`,&nbsp;`2`,&nbsp;`_`                                                                                                                        | If there are multiple characters in brackets, the class will match any single character from the specified list
 `[a-z]`<br>`[0-9]`   | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9`                                     | If two characters in brackets are separated by a hyphen, the class will match any single character from the specified range
@@ -124,7 +124,7 @@ Class                | Matches                                                  
 
 Extended glob patterns represent a choice of alternatives repeated a certain number of times.
 
-Extglob                   | Matches                                                                                                        | Description
+Pattern                   | Matches                                                                                                        | Description
 ------------------------- | ---------------------------------------------------------------------------------------------------------------| -----------
 `@(bar\|baz)`             | `bar`,&nbsp;`baz`                                                                                              | One of the given subpatterns exactly one time
 `?(foo)`<br>`?(bar\|baz)` | empty&nbsp;string,&nbsp;`foo`<br>empty&nbsp;string,&nbsp;`bar`,&nbsp;`baz`                                     | One of the given subpatterns zero or one time 
@@ -132,11 +132,51 @@ Extglob                   | Matches                                             
 `+(foo)`<br>`+(bar\|baz)` | `foo`,&nbsp;`foofoofoo`<br>`bar`,&nbsp;`bazbaz`,&nbsp;`barbaz`                                                 | One of the given subpatterns one or more times
 `!(foo)`<br>`!(bar\|baz)` | any&nbsp;string&nbsp;except&nbsp;`foo`<br>any&nbsp;string&nbsp;except&nbsp;`bar`,&nbsp;`baz`                   | Anything except for the given subpatterns
 
+Strings are split by separators _before_ extglobs are processed, so extglobs with separators inside will also be split and won't be recognized:
+
+```js
+const isMatch = outmatch('@(foo|bar/baz')
+
+isMatch('foo') //=> false
+isMatch('bar/baz') //=> false
+isMatch('@(foo|bar/baz)') //=> true
+```
+
 ### Braces
+
+Brace expansion is a feature of Bash that makes it easy to generate a list of strings from a single source pattern. In the pattern, parts that should differ between the strings are put in curly braces, and the rest is left intact. For example, `src/{foo,bar}/baz` would be expanded to two strings, `src/foo/baz` and `src/bar/baz`.
+
+Pattern     | Matches                       | Description
+----------- | ------------------------------| -----------
+`{bar,baz}` | `bar`,&nbsp;`baz`             | Matches one of the subpatterns
+`{1..5}`    | 1,&nbsp2,&nbsp3,&nbsp4,&nbsp5 | Matches any number from the range
+
+
+This feature is similar to extglobs, but they work differently. Extglobs are converted to RegExp parens (`@(bar|baz)` → `(bar|baz)`) while braces expand a single pattern into an array of patterns, so `outmatch('foo/{bar,baz}')` becomes `outmatch(['foo/bar', 'foo/baz'])`. 
+
+Braces are processed _before anything else_, so, unlike extglobs, they work even with subpatterns that contain separators:
+
+```js
+const isMatch = outmatch('src/{foo,bar/baz}')
+
+isMatch('src/foo') //=> true
+isMatch('src/bar/baz') //=> true
+isMatch('src/bar') //=> false
+```
+
+Braces can be nested:
+
+```js
+const isMatch = outmatch('{one,{two,three}}')
+
+isMatch('one') //=> true
+isMatch('two') //=> true
+isMatch('three') //=> true
+```
 
 ### Escaping
 
-Preceding a special character with a backslash `\` will escape the character making it be treated literally:
+Preceding a special character with a backslash `\` escapes the character making it be treated literally:
 
 ```js
 const isMatch = outmatch('foo\?*')
