@@ -17,7 +17,7 @@
 
 Outmatch takes one or more glob patterns, compiles them into a RegExp and returns a function for matching strings with it.
 
-Glob patterns are strings that contain wildcards such as `*`, `?`, `[abc]` and others. When a pattern is matched with another string, these wildcards can replace one or more symbols. For example, `src/*` would match both `src/foo` and `src/bar`.
+Glob patterns are strings that contain wildcards such as `*`, `?`, `[abc]` and others. When a pattern is compared with another string, these wildcards can replace one or more symbols. For example, `src/*` would match both `src/foo` and `src/bar`.
 
 While globs are usually used to search file paths separated by slashes, with outmatch it is possible to match _arbitrary_ strings, whether separated or not.
 
