@@ -170,7 +170,7 @@ pnpm install outmatch
   </tr>
   <tr>
     <td><code>{bar,baz}</code></td>
-    <td>Expands the pattern to an array of patterns. For example, <code>outmatch('src/{foo,bar}/baz')</code> is equivalent to <code>outmatch(['src/foo/baz', 'src/bar/baz'])</code></td>
+    <td>Expands the pattern to an array of patterns, so <code>outmatch('src/{foo,bar}/baz')</code> is equivalent to <code>outmatch(['src/foo/baz', 'src/bar/baz'])</code><br><br>While braces are similar to extglobs, they work differently. Braces are expanded <em>before anything else</em>, so, unlike extglobs, they can handle subpatterns that contain separators.<br><br>Braces can be nested: <code>src/{foo,bar/{baz,qux}}</code> expands to <code>src/foo</code>, <code>src/bar/baz</code> and <code>src/bar/qux</code></td>
   </tr>
   <tr>
     <td><code>{1..5}</code></td>
@@ -181,7 +181,7 @@ pnpm install outmatch
   </tr>
   <tr>
     <td><code>!</code></td>
-    <td>Negates a pattern when put at the start of it. A negated pattern matches any string that doesn't match the part after the <code>!</code>. When put in an array among positive patterns, negated patterns effectively work as ignores.<br>If repeated multiple times, each `!` will invert the effect, so <code>!!foo/bar</code> is the same as <code>foo/bar</code> and <code>!!!baz/qux</code> is the same as <code>!baz/qux</code>.</td>
+    <td>Negates a pattern when put at the start of it. If repeated multiple times, each <code>!</code> will invert the effect, so <code>!!foo/bar</code> is the same as <code>foo/bar</code> and <code>!!!baz/qux</code> is the same as <code>!baz/qux</code>.<br><br>A negated pattern matches any string that doesn't match the part after the <code>!</code>. When put in an array among positive patterns, negated patterns effectively work as ignores.</td>
   </tr>
   <tr>
     <td colspan="2"><strong>Escaping</strong></td>
