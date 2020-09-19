@@ -109,10 +109,6 @@ pnpm install outmatch
 
 <table>
   <tr>
-    <th>Pattern</th>
-    <th>Description</th>
-  </tr>
-  <tr>
     <td><code>?</code></td>    
     <td>Matches exactly one arbitrary character excluding separators</td>
   </tr>  
@@ -140,7 +136,7 @@ pnpm install outmatch
   </tr>  
   <tr>
     <td><code>[!abc]</code><br><code>[!f-k]</code></td>    
-    <td>Match a single character _not_ in the specified list or range</td>
+    <td>Match a single character <em>not</em> in the specified list or range</td>
   </tr> 
   <tr>
     <td colspan="3"><strong>Extglobs</strong></td>
