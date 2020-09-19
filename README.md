@@ -106,9 +106,34 @@ pnpm install outmatch
 
 Pattern  | Description
 -------- | ------------
-`?`      | Matches exactly one arbitrary character (excluding separators if specified in options)
-`*`      | Matches zero or more arbitrary characters (excluding separators if specified in options)
-`**`     | Has a special meaning only if the `separator` property in options is not `false`. Matches any number of segments when used as a whole segment (`/**/` in the middle, `**/` at the beginning or `/**` at the end of a separated string)
+`?`      | Matches exactly one arbitrary character excluding separators
+`*`      | Matches zero or more arbitrary characters excluding separators
+
+```js
+const isMatch = outmatch('src/*.?s')
+
+isMatch('src/index.js') //=> true
+isMatch('src/foo.ts') //=> true
+isMatch('src/readme.md') //=> false (the extension doesn't match)
+isMatch('src/bar/bar.ts') //=> false (there is a separator after 'bar')
+```
+
+### Globstars
+
+If the `separator` option is not `false` and a pattern contains separators, two consecutive stars have a special meaning when they are used as a whole segment (e.g. `/**/` if `/` is the separator).
+
+Pattern | Description
+------- | -----------
+`**`    | Matches any number of segments when used as a whole segment
+
+```js
+const isMatch = outmatch('src/**/baz')
+
+isMatch('src/baz') //=> true
+isMatch('src/foo/baz') //=> true
+isMatch('src/foo/bar/baz') //=> true
+isMatch('src/foo') //=> false (lacks 'baz' at the end)
+```
 
 ### Character Classes
 
@@ -135,7 +160,7 @@ Pattern                   | Matches                                             
 Strings are split by separators _before_ extglobs are processed, so extglobs with separators inside will also be split and won't be recognized:
 
 ```js
-const isMatch = outmatch('@(foo|bar/baz')
+const isMatch = outmatch('@(foo|bar/baz)')
 
 isMatch('foo') //=> false
 isMatch('bar/baz') //=> false
@@ -144,15 +169,14 @@ isMatch('@(foo|bar/baz)') //=> true
 
 ### Braces
 
-Brace expansion is a feature of Bash that makes it easy to generate a list of strings from a single source pattern. In the pattern, parts that should differ between the strings are put in curly braces, and the rest is left intact. For example, `src/{foo,bar}/baz` would be expanded to two strings, `src/foo/baz` and `src/bar/baz`.
+Brace expansion is a feature of Bash that generates a list of strings from a single source pattern. In the pattern, parts that should differ between the strings are put in curly braces, and the rest is left intact. For example, `src/{foo,bar}/baz` would be expanded to two strings, `src/foo/baz` and `src/bar/baz`.
 
 Pattern     | Matches                       | Description
 ----------- | ------------------------------| -----------
 `{bar,baz}` | `bar`,&nbsp;`baz`             | Matches one of the subpatterns
 `{1..5}`    | 1,&nbsp2,&nbsp3,&nbsp4,&nbsp5 | Matches any number from the range
 
-
-This feature is similar to extglobs, but they work differently. Extglobs are converted to RegExp parens (`@(bar|baz)` → `(bar|baz)`) while braces expand a single pattern into an array of patterns, so `outmatch('foo/{bar,baz}')` becomes `outmatch(['foo/bar', 'foo/baz'])`. 
+This feature is similar to extglobs, but they work differently. Extglobs are converted to RegExp groups (`@(bar|baz)` → `(bar|baz)`) while braces expand a single pattern into an array of patterns, so `outmatch('foo/{bar,baz}')` becomes `outmatch(['foo/bar', 'foo/baz'])`. 
 
 Braces are processed _before anything else_, so, unlike extglobs, they work even with subpatterns that contain separators:
 
@@ -205,6 +229,8 @@ const isMatch = outmatch(['src/*', '!src/bar'])
 isMatch('src/foo') //=> true
 isMatch('src/bar') //=> false
 ```
+
+Exclamation marks can be repeated multiple times. Each mark will invert the pattern, so `!!foo/bar` is the same as `foo/bar` and `!!!baz/qux` is the same as `!baz/qux`.
 
 ## Comparison
 
