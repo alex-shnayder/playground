@@ -75,9 +75,9 @@ For detailed comparison with the alternatives, see the [corresponding section](#
 
 ## Installation
 
-Outmatch is distributed via the npm package registry. It can be installed using one of the compatible package managers or included directly from a CDN.
+Outmatch comes built in ESM, CommonJS and UMD formats and includes TypeScript typings, so it is compatible with any module system.
 
-The package comes built in ESM, CommonJS and UMD formats and includes TypeScript typings, so it is compatible with any module system.
+The package is distributed via the npm package registry. It can be installed using one of the compatible package managers or included directly from a CDN.
 
 #### [npm](https://www.npmjs.com)
 
