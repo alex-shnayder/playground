@@ -108,19 +108,16 @@ pnpm install outmatch
 
 ### Basic Wildcards
 
-Pattern  | Description
--------- | ------------
-`?`      | Matches exactly one arbitrary character excluding separators
-`*`      | Matches zero or more arbitrary characters excluding separators
+Pattern                    | Matches | Description
+-------------------------- | ------- | -----------
+`?`                        |         | Matches exactly one arbitrary character excluding separators
+`*`                        |         | Matches zero or more arbitrary characters excluding separators
+`**`                       |         | Matches any number of segments when used as a whole segment in a separated pattern
+__Character&nbsp;classes__ |
+`[a2_]`                    | `a`,&nbsp;`2`,&nbsp;`_`                                                                                                                        | If there are multiple characters in brackets, the class will match any single character from the specified list
+`[a-z]`<br>`[0-9]`         | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9`                                     | If two characters in brackets are separated by a hyphen, the class will match any single character from the specified range
+`[!abc]`<br>`[!f-k]`       | any&nbsp;character&nbsp;except&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>any&nbsp;character&nbsp;except&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | If the first character in brackets is an exclamation mark, the class will match any single character _not_ in the list or range
 
-```js
-const isMatch = outmatch('src/*.?s')
-
-isMatch('src/index.js') //=> true
-isMatch('src/foo.ts') //=> true
-isMatch('src/readme.md') //=> false (the extension doesn't match)
-isMatch('src/bar/bar.ts') //=> false (there is a separator after 'bar')
-```
 
 ### Globstars
 
@@ -128,7 +125,7 @@ If the `separator` option is not `false` and a pattern contains separators, two 
 
 Pattern | Description
 ------- | -----------
-`**`    | Matches any number of segments when used as a whole segment
+
 
 ```js
 const isMatch = outmatch('src/**/baz')
@@ -143,11 +140,7 @@ isMatch('src/foo') //=> false (lacks 'baz' at the end)
 
 Character classes are defined by one or more symbols surrounded by square brackets. One class always matches exactly one character.
 
-Pattern              | Matches                                                                                                                                        | Description
--------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -----------
-`[a2_]`              | `a`,&nbsp;`2`,&nbsp;`_`                                                                                                                        | If there are multiple characters in brackets, the class will match any single character from the specified list
-`[a-z]`<br>`[0-9]`   | any&nbsp;letter&nbsp;from&nbsp;`a`&nbsp;to&nbsp;`z`<br>any&nbsp;number&nbsp;from&nbsp;`0`&nbsp;to&nbsp;`9`                                     | If two characters in brackets are separated by a hyphen, the class will match any single character from the specified range
-`[!abc]`<br>`[!f-k]` | any&nbsp;character&nbsp;except&nbsp;`a`,&nbsp;`b`,&nbsp;`c`<br>any&nbsp;character&nbsp;except&nbsp;letters&nbsp;from&nbsp;`f`&nbsp;to&nbsp;`k` | If the first character in brackets is an exclamation mark, the class will match any single character _not_ in the list or range
+
 
 ### Extglobs
 
