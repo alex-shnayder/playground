@@ -215,6 +215,20 @@ The original pattern or array of patterns that was used to compile the regular e
 
 The options object that was used to compile the regular expression and create the isMatch function.
 
+### Options
+
+Option      | Type              | Default Value | Description
+------------|-------------------|---------------|------------
+`separator` | boolean \| string | true          | Defines the separator used to split patterns into segments<ul><li>`true` — `\` on Windows, `/` otherwise<li>`false` — don't split patterns<li>_any string_ — custom separator
+`!`         | boolean           | true          | Toggles pattern negation
+`?`         | boolean           | true          | Toggles single-char wildcards
+`*`         | boolean           | true          | Toggles multi-char wildcards
+`**`        | boolean           | true          | Toggles globstars
+`[]`        | boolean           | true          | Toggles character classes
+`()`        | boolean           | true          | Toggles extglobs
+`{}`        | boolean           | true          | Toggles brace expansion
+`.`         | boolean           | true          | Toggles whether to ignore segments starting with a dot (dotfiles)
+
 ## Comparison
 
 Coming soon.
