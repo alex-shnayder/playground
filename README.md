@@ -77,6 +77,8 @@ For detailed comparison with the alternatives, see the [corresponding section](#
 
 Outmatch is distributed via the npm package registry. It can be installed using one of the compatible package managers or included directly from a CDN.
 
+The package comes built in ESM, CommonJS and UMD formats and includes TypeScript typings, so it is compatible with any module system.
+
 #### [npm](https://www.npmjs.com)
 
 ```
@@ -97,8 +99,10 @@ pnpm install outmatch
 
 #### CDN
 
-- [jsDelivr](https://www.jsdelivr.com/package/npm/outmatch)
+When included from a CDN, outmatch is available as the global function `outmatch`.
+
 - [unpkg](https://unpkg.com/outmatch)
+- [jsDelivr](https://www.jsdelivr.com/package/npm/outmatch)
 
 ## Usage
 
