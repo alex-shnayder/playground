@@ -34,6 +34,8 @@ jobs:
           workflow: ci.yml
           name: build
           commit: ${{ github.sha }}
+      - run: ls
+      - run: ls build
       - name: Make the package public
         run: npx json -I -f package.json -e "delete this.private"
       # - name: Publish to NPM
