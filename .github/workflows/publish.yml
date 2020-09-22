@@ -3,7 +3,7 @@ name: Publish
 on:
   workflow_dispatch:
   push:
-    tags: "v*.*.*"
+    tags: 'v*.*.*'
 
 jobs:
   publish:
@@ -33,6 +33,7 @@ jobs:
         with:
           workflow: ci.yml
           name: build
+          path: build
           commit: ${{ github.sha }}
       - run: ls
       - run: ls build
